@@ -5,7 +5,7 @@ import Pokemon from "./Pokeinfo";
 
 const Buscar = () => {
   const [poke, setPoke] = useState([]);
-  const [name, setName] = useState("1");
+  const [name, setName] = useState(1);
   const [cargando, setCargando] = useState(true);
   useEffect(() => {
     const data = async () => {
@@ -38,38 +38,40 @@ const Buscar = () => {
     if (pokeName >= 650) {
       setCargando(true);
     } else {
-      setName(pokeName);
+      setName(Number(pokeName));
     }
-
     form.reset();
   };
 
   return (
     <div className="container p-5">
-      <form onSubmit={buscarPorNombre} className="input-group  ">
-        <input
-          className="form-control  mb-5 border  border-dark"
-          aria-label="Example text with button addon"
-          aria-describedby="button-addon1"
-          name="pokeName"
-          type="text"
-          placeholder="Id o Nombre"
-        />
-        <button
-          className="btn btn-primary mb-5 border border-dark"
-          id="button-addon1"
-          type="submit"
-        >
-          Buscar
-        </button>
-      </form>
+      <div className="mx-4 px-4">
+        <form onSubmit={buscarPorNombre} className="input-group ">
+          <input
+            className="form-control mb-5  border border-dark"
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            name="pokeName"
+            type="text"
+            placeholder="Id o Nombre"
+          />
+          <button
+            className="btn btn-primary mb-5 border border-dark"
+            id="button-addon1"
+            type="submit"
+          >
+            Buscar
+          </button>
+        </form>
+      </div>
+
       {cargando ? (
         <h1>
           Lo siento pokemon No econtrado :( intentalo de nuevo <br /> Tambien
           puedes intentar por ID Tienes 649 diponobles
         </h1>
       ) : (
-        <Pokemon pokemon={poke} />
+        <Pokemon pokemon={{ poke, name, setName }} />
       )}
     </div>
   );
