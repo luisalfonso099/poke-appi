@@ -1,15 +1,23 @@
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import React from "react";
-import Buscar from "./components/Buscar";
-import imagen from "./assets/pokeapi.png";
+import Todos from "./components/Todos.jsx";
+import NavBar from "./components/NavBar.jsx";
+import Detalles from "./components/Detalles.jsx";
 
 function App() {
   return (
-    <div className="app">
-      <img className="my-4" alt="Poke api" src={imagen} />
-      <h1 className="mb-4 text-white">Busca tu pokemon favorito</h1>
-      <Buscar />
-    </div>
+    <Router>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Todos />
+        </Route>
+        <Route path="/detalles/:name?">
+          <Detalles />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
