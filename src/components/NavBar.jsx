@@ -8,17 +8,16 @@ export default function NavBar() {
     const search = (e)=>{
         e.preventDefault();
         let form = e.currentTarget;
-        console.log(form)
         let pokemon = form.Search.value;
        history.push(`/detalles/${pokemon}`)
        form.reset();
       }
     return (
-              <nav className="bg-dark navbar">
+              <nav className="bg-secondary navbar">
                 <div className="container  px-5">
                 
                 <Link to="/" className="navbar-brand text-info"> 
-                <img style={{width: "30px"}} className="mx-2" src={pokeball}/>
+                <img style={{width: "30px"}} alt="pokeball" className="mx-2" src={pokeball}/>
                 Inicio
                 </Link>
                   <form onSubmit={search} className="d-flex">
@@ -26,6 +25,5 @@ export default function NavBar() {
                   <button className="btn btn-outline-info" type="submit">Search</button>
                   </form>
                 </div>
-               </nav>
-            
- )}
+               </nav>  
+           )}
