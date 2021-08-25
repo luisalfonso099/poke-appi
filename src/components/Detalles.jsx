@@ -2,20 +2,20 @@ import React, {useEffect, useState} from "react";
 import { useParams,Link } from 'react-router-dom';
 
 
+
 const Detalles = () => {
   const [pokemon, setPokemon] = useState(null)
   const [cargando, setCargando] = useState(true)
   const {name} = useParams();
-  const getPokemon = async()=>{
-    const get = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const data = await get.json() 
-    setPokemon([data])
-    setCargando(false)
-  }
+  
   useEffect(()=>{
-      getPokemon()
-  },[name])
-
+    const getPokemon = async()=>{
+      const get = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      const data = await get.json() 
+      setPokemon([data])
+      setCargando(false)
+    }
+    getPokemon()},[])
 
   return (
     <div className="text-center" >
@@ -28,14 +28,14 @@ const Detalles = () => {
         pokemon.map(poke => 
           { 
             return (
-        <div className="card mt-3 p-4" key={poke.id}>
+        <div className="mt-5 p-4" key={poke.id}>
         <div className="row d-flex justify-content-center align-items-center g-0">
-          <div className="col-md-7">
-            <img src={poke.sprites.other.dream_world.front_default} style={{height: "600px"}}  className="img-fluid  rounded-start" alt={poke.name}/>
+          <div className="col-md-5">
+            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}   className="img-fluid mx-0 rounded-start" alt={poke.name}/>
           </div>
           <div className="col-md-5 mt-2">
             <div className="card-body">
-              <h1 className="card-title">{poke.name} </h1>
+              <h1 className="card-title fst-italic">{poke.name} </h1>
               <h4>Nro: {poke.id}</h4>
               <p className="card-text">Habilidades :  {poke.abilities[0].ability.name}</p>
               <p className="card-text">Tipo:  {poke.types[0].type.name}</p>

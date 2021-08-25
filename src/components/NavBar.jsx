@@ -12,13 +12,14 @@ export default function NavBar() {
        history.push(`/detalles/${pokemon}`)
        form.reset();
       }
+
     return (
               <nav className="bg-secondary navbar">
                 <div className="container  px-5">
                 
                 <Link to="/" className="navbar-brand text-info"> 
                 <img style={{width: "30px"}} alt="pokeball" className="mx-2" src={pokeball}/>
-                Inicio
+                PokeApp
                 </Link>
                   <form onSubmit={search} className="d-flex">
                   <input className="form-control me-2" type="search" name="Search" placeholder="Search" aria-label="Search"/>
