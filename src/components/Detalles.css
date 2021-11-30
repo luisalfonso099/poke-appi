@@ -1,0 +1,130 @@
+.info-detalles{
+    background-color: rgba(246, 248, 250, 0.5);
+    border-radius: 7px;
+}
+.stack{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(44, 43, 43, 0.3);
+    border-radius: 7px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.black{
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+}
+.blue{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+}
+.brown{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top, rgb(153, 10, 10) 0%, #e67575 100%);
+}
+.gray{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top, rgb(48, 47, 47) 0%, #9e9d9d 100%);
+}
+.green{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top,rgb(15, 100, 4) 0%, #62bd26 100%);
+}
+
+.pink{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top,rgb(216, 10, 44) 0%, #fcb4c3 100%);
+
+}
+.purple{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top,rgb(170, 2, 170) 0%, #e298de 100%);
+}
+.red{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top,rgb(230, 10, 10) 0%, #fc8e8e 100%);
+}
+
+.white{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top, rgb(190, 181, 192) 0%, #fafafa 100%);
+}
+.yellow{
+    width: 100%;
+    margin: 50px auto;
+    border-radius: 5px 70px;
+    padding: 20px;
+    background-image: linear-gradient(to top, yellow 0%, #fafafa 100%);
+}
+.evolucion{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #b6caee;
+    border-radius: 4px 40px;
+    margin: 20px 0;
+}
+.img-evoluciones{
+    height: 200px;
+    transition:all 0.5s;
+   
+}
+.img-evoluciones:hover{
+    height: 220px
+}
+.img-tipos{
+    width: 60px;
+}
+.img-tipos-btn{
+    width: 20px;
+}
+.evoluciones{
+   text-decoration: none;
+   text-align: center;
+   color: rgb(49, 47, 47);
+}
+.loading{
+    margin: 50vh 50vw;
+}
+.nombrePokemon{
+    font-size: 4em;
+    font-weight: 100;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    text-align: center;
+
+}
+.tipo{
+    text-align: center;
+    margin: 0 5px;
+    text-decoration: dashed;
+}

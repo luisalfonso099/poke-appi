@@ -1,0 +1,39 @@
+.poke-general{
+    border: 3px solid rgba(36, 35, 35, 0.3);
+    border-radius: 5px;
+    margin: 10px;
+}
+.poke-general:hover{
+    transition: all 0.5s ease;
+    background-color: rgb(109, 218, 145);
+}
+.img-poke{
+    width: 200px;
+    transition: all 0.5s ease;
+}
+.img-poke:hover{
+    width: 210px;
+}
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.contenedor-pokemons{
+    width: 750px;
+    height: 500px;
+}
+.contenedor a{
+    text-decoration: none;
+    color: black ;
+}
+
+.info-container{
+    background-color: rgba(132, 211, 211, 0.5);
+    padding: 0.5em;
+    border-radius: 8px;
+}
+
+
+

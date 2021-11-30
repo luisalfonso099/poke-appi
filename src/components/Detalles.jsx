@@ -1,66 +1,133 @@
 import React, {useEffect, useState} from "react";
-import { useParams,Link } from 'react-router-dom';
-
-
+import { useParams } from 'react-router-dom';
+import Tipo from "./InfoDetalles/Tipo";
+import Evolucion from "./InfoDetalles/Evolucion";
+import "./Detalles.css"
+import Habilidad from "./InfoDetalles/Habilidad";
+import TextoDelPokemon from "./InfoDetalles/TextoDelPokemon";
 
 const Detalles = () => {
-  const [pokemon, setPokemon] = useState(null)
+  const [pokemon, setPokemon] = useState([])
   const [cargando, setCargando] = useState(true)
+  const [porEspecie, setPorEspecie] = useState([])
   const {name} = useParams();
-  
-  useEffect(()=>{
-    const getPokemon = async()=>{
-      const get = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      const data = await get.json() 
+  useEffect(() => {
+    const porEspecies = async()=>{
+      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`)
+      const data = await resp.json();
+      setPorEspecie([data])
+    }
+    const porDetalles = async()=>{
+      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      const data = await resp.json();
       setPokemon([data])
       setCargando(false)
     }
-    getPokemon()},[])
-
-  return (
-    <div className="text-center" >
+    porDetalles()
+    porEspecies()
+  },[name])
+ 
+    const namePokemon = porEspecie.length > 0 && porEspecie[0].names[6].name;
+    const color = porEspecie.length > 0 && porEspecie[0].color.name;
+    const extraerPeso = pokemon.length > 0 && pokemon[0].weight.toString()
+    const peso = extraerPeso.length > 0 && extraerPeso.slice(0, extraerPeso.length -1) + "," + extraerPeso.slice(extraerPeso.length -1,extraerPeso.length )
+    const extraerAltura = pokemon.length > 0 && pokemon[0].height.toString()
+    const alto = extraerAltura.length > 0 && 
+    (extraerAltura.length < 2 ? "0," + extraerAltura : extraerAltura.slice(0, extraerAltura.length -1) + "," + extraerAltura.slice(extraerAltura.length -1,extraerAltura.length ))
+    return (
+    <div className="container" >
       {
         cargando ? (
-        <div className="spinner-border mt-5" role="status">
+        <div className="spinner-border loading" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       ): (
         pokemon.map(poke => 
           { 
             return (
-        <div className="mt-5 p-4" key={poke.id}>
-        <div className="row d-flex justify-content-center align-items-center g-0">
-          <div className="col-md-5">
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}   className="img-fluid mx-0 rounded-start" alt={poke.name}/>
+        <div className="my-5 targeta p-2 d-flex  row" key={poke.id}>
+           <h2 className="nombrePokemon">{namePokemon} #{name} </h2>
+          <div className="col-md-5 d-flex flex-column ">
+            <img 
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}   
+            alt={poke.name}
+            className={ `${color.toString()} shadow-lg animate__animated animate__pulse`}
+            />
+              <div className="text-center stack">
+                  HP
+                  <div className="progress my-1">
+                    <div 
+                    className="progress-bar bg-primary"
+                    role="progressbar" 
+                    style={{"width": `${poke.stats[0].base_stat}%`}} 
+                    aria-valuemax="100">
+                    <i className="fas fa-heartbeat"></i>  
+                    </div>
+                  </div>
+                  Ataque
+                  <div className="progress my-1">
+                    <div 
+                    className="progress-bar bg-danger" 
+                    role="progressbar" 
+                    style={{"width": `${poke.stats[1].base_stat}%`}} 
+                    aria-valuemax="100">
+                     <i className="fas fa-fist-raised ">
+                       </i>  
+                    </div>
+                  </div>
+                  Defensa
+                  <div className="progress my-1">
+                    <div 
+                    className="progress-bar bg-success" 
+                    role="progressbar" 
+                    style={{"width": `${poke.stats[2].base_stat}%`}} 
+                    aria-valuemax="100">
+                     <i className="fas fa-shield-alt "></i> 
+                    </div>
+                  </div>
+                  Especial
+                  <div className="progress my-1">
+                    <div 
+                    className="progress-bar bg-warning" 
+                    role="progressbar" 
+                    style={{"width": `${poke.stats[3].base_stat}%`}} 
+                    aria-valuemax="100">
+                     <i className="fas fa-star"></i> 
+                    </div>
+                  </div>
+                  
+              </div>
           </div>
-          <div className="col-md-5 mt-2">
-            <div className="card-body">
-              <h1 className="card-title fst-italic">{poke.name} </h1>
-              <h4>Nro: {poke.id}</h4>
-              <p className="card-text">Habilidades :  {poke.abilities[0].ability.name}</p>
-              <p className="card-text">Tipo:  {poke.types[0].type.name}</p>
-              <p className="card-text mb-0">HP: </p>
-              <div className="progress">
-                  <div className="progress-bar bg-success" role="progressbar" style={{width:`${poke.stats[0].base_stat}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-               </div>
-              <p className="card-text mt-4 mb-1">Ataque:</p>
-              <div  className="progress">
-                  <div className="progress-bar bg-danger" role="progressbar" style={{width:`${poke.stats[1].base_stat}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-               </div>
-               <p className="card-text mt-4 mb-1">Defensa: </p>
-              <div className="progress">
-                  <div className="progress-bar bg-warning" role="progressbar" style={{width:`${poke.stats[2].base_stat}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-               </div>
-               <p className="card-text mt-4 mb-1">Especial:</p>
-               <div className="progress">
-                  <div className="progress-bar bg-primary" role="progressbar" style={{width:`${poke.stats[3].base_stat}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-               </div>
-           <Link to='/' className="mt-3 btn btn-dark">Volver al Listado</Link>
+          <div className="info-detalles col-md-6 ">
+          <TextoDelPokemon porEspecie={porEspecie}/>
+           <hr/>
+          <div className="info">
+              <h2> 
+               Habilidad
+              </h2>
+             <Habilidad name={name} pokemon={pokemon}/>
+            </div>
+           <hr/>
+            <div className="d-flex justify-content-between">
+              <div>
+                      <h5>Altura</h5>
+                      <p > 
+                        <i className="fs-2 mx-3 fas fa-arrows-alt-v"></i>
+                        {alto} m
+                      </p>
+                      <br/>
+                      <h5>Peso </h5>
+                      <p >  
+                        <i className="fas fs-2 fa-weight-hanging"></i>  {" "}
+                        {peso} kg 
+                      </p>
+              </div>
+              <Tipo tipo={poke.types} pokemon={poke}/>
             </div>
           </div>
-        </div>
       </div>
       )}))}
+      <Evolucion name={porEspecie} color={color}/>
     </div>
   );
 };
